@@ -1,0 +1,7 @@
+{
+    "host": "j-mysql-team.cqg6wzvrxiua.ap-northeast-2.rds.amazonaws.com",
+    "user": "admin",
+    "password": "20220606",
+    "port": "3306",
+    "database": "crawling"
+}
