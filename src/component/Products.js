@@ -23,7 +23,7 @@ const Products = () => {
         getProducts();
     }, []);
 
-    console.log(data);
+    // console.log(data);
 
     /*
     useEffect(() => {
