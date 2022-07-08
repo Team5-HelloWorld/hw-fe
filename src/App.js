@@ -1,5 +1,6 @@
 import './App.css';
 import Home from './component/Home';
+import Home2 from './component/Home2';
 import Navbar from './component/Navbar';
 import { Routes, Route } from 'react-router-dom';
 // import Products from './component/Products';
@@ -13,6 +14,8 @@ import Borrow from './component/Borrow';
 import About from './component/About';
 import Contact from './component/Contact';
 import ProductsAll from './component/ProductsAll';
+import Register from './component/Signup2';
+import Signin2 from './component/Signin2';
 // import Profile from './component/Profile';
 
 function App() {
@@ -30,10 +33,13 @@ function App() {
         {/* <Route path="/login" element={<SignIn />} /> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home2 />} /> */}
         <Route path="/products" element={<ProductsAll />} />
         <Route path="/products/:id" element={<Product />} />
-        <Route path="/login" element={<SignIn />} />
+        {/* <Route path="/login" element={<SignIn />} /> */}
+        <Route path="/login" element={<Signin2 />} />
         <Route path="/register" element={<SignUp />} />
+        {/* <Route path="/register" element={<Register />} /> */}
         <Route path="/mypage" element={<MypageForm />} />
         <Route path="/revise" element={<Revise />} />
         <Route path="/rent" element={<Rent />} />

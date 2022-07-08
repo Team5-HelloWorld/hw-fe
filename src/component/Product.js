@@ -59,8 +59,10 @@ const Product = () => {
         const getProduct = async () => {
             setLoading(true);
             const response = await fetch(`http://localhost:8080/products/${id}`)
+            // console.log(response);
             setProduct(await response.json());
             setLoading(false);
+
             setReview(product.review);
             
             // if(product.review && product.review.length > 0) {
@@ -75,12 +77,12 @@ const Product = () => {
             //     // setResult1(result1)
             //     // setResult2(result2)
             //     // setResult3(result3)
-            //     // console.log(result1);
+                // console.log(result1);
             // }
         }
     }
     getProduct();
-    }, );
+    }, []);
     
     // function getReview() {
     //     for(var i = 0; i < review.length; i++) {
@@ -133,7 +135,7 @@ const Product = () => {
                         {/* <i className="fa fa-star"></i> */}
                     </p>
                     <h3 className="display-6 fw-bold my-4">
-                        {product.price} 원
+                        {product.price}원
                     </h3>
                     <p className="lead">
                         {product.goodsInfo}

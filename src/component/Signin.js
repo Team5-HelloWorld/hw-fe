@@ -14,45 +14,15 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import swal from 'sweetalert';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
 //api
-// const login = () => {
-//   const {email, password} = this.state;
-//   fetch("apt", {
-//     method: "POST",
-//     body: JSON.stringify({
-//       email: email,
-//       password: password
-//     })
-//   })
-//   .then((response) => response.json())
-//   .then((result) => {
-//     if(result.TOKEN) {
-//       localStorage.setItem("TOKEN", result.TOKEN);
-//     }
-//   })
-// }
-
-//api
 async function loginUser(credentials) {
-  return fetch('https://www.mecallapi.com/api/login', {
+  return fetch('http://localhost:8080/login', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      "Accept": "application/json"
     },
     body: JSON.stringify(credentials)
   })
@@ -69,6 +39,8 @@ async function loginUser(credentials) {
       username,
       password
     });
+    console.log(response);
+
     if ('accessToken' in response) {
       swal("Success", response.message, "success", {
         buttons: false,
@@ -83,16 +55,6 @@ async function loginUser(credentials) {
       swal("Failed", response.message, "error");
     }
   }
-
-// export default function SignIn() {
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     const data = new FormData(event.currentTarget);
-//     console.log({
-//       email: data.get('email'),
-//       password: data.get('password'),
-//     });
-//   };
 
   return (
     <ThemeProvider theme={theme}>
@@ -154,14 +116,13 @@ async function loginUser(credentials) {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

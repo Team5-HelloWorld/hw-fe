@@ -115,7 +115,7 @@ const Products = () => {
                 <>
                     <div className="col-md-3">
                         <div class="card h-100 text-center p-4" key={product.id}>
-                            <img src={product.imageUrl} class="card-img-top" alt={product.name}/>
+                            <img src={product.imageUrl} class="card-img-top" width="450" height="200" alt={product.name}/>
                             <div class="card-body">
                                 <h5 class="card-title mb-0">{product.name.substring(0,12)}...</h5>
                                 <p class="card-text lead fw-bold">{product.price}원</p>

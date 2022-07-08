@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,50 +14,18 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
-// api
-// const register = () => {
-//   const {email, password, name} = this.state;
-//   fetch("http://api", {
-//     method: "POST",
-//     body: JSON.stringify({
-//       email: email,
-//       password: password,
-//       name: name
-//     })
-//   })
-//   .then((response) => response.json())
-//   .then((result) => {
-//     result.message === "SUCCESS" ? alert("회원가입 성공") : alert("회원가입 실패")
-//   })
-// }
-
-
-
-// export default function SignUp() {
 function SignUp() {
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
-
-  // const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -74,7 +43,7 @@ function SignUp() {
 
     let data = {email, password, name}
 
-    let result = await fetch("url", {
+    let result = await fetch("http://localhost:8080/member/register", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -82,10 +51,16 @@ function SignUp() {
         "Accept": "application/json"
       }
     })
-    result = await result.json()
+    result = await result.json();
     console.log("result", result);
-    localStorage.setItem("user-info", JSON.stringify(result));
-    // history.push("/add")
+
+    if(result.status === "9000") {
+      swal("회원가입이 완료되었습니다!")
+      navigate("/login");
+    }
+    else if(result.status === '9001') {
+      swal("이미 존재하는 이메일입니다.")
+    }
   }
 
   return (
@@ -117,19 +92,11 @@ function SignUp() {
                   id="name"
                   label="이름"
                   onChange={(e)=>setName(e.target.value)}
+                  // error={nameError !== '' || false}
                   autoFocus
                 />
               </Grid>
-              {/* <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid> */}
+        
               <Grid item xs={12}>
                 <TextField
                   required
@@ -171,14 +138,13 @@ function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
    );
