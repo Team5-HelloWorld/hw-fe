@@ -45,6 +45,7 @@ function SignIn2() {
     console.log("result", result);
 
     if(result.status === "8000") {
+      sessionStorage.setItem("sessionVal", email)
       swal("로그인에 성공하였습니다.!", {
         // buttons: false,
         timer: 2000
