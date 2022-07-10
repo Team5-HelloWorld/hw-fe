@@ -50,7 +50,7 @@ const Register = () => {
 
     // post
     await axios
-      .post('http://localhost:8080/member/register', postData)
+      .post('http://localhost:8080/member', postData)
       .then(function (response) {
         console.log(response, '성공');
         navigate('/login');

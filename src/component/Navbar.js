@@ -8,10 +8,12 @@ export default function Navbar() {
     // const state = useSelector((state) => state.handleCart)
     // const token = localStorage.getItem('accessToken');
     const sessionValue = sessionStorage.getItem('sessionVal');
+    // const sessionValue = sessionStorage.getItem('sessionVal2');
     
     const onClickHandler = () => {
         // fetch("http://localhost:8080/logout");
         sessionStorage.removeItem('sessionVal');
+        sessionStorage.removeItem('sessionVal2');
         window.location.href = "/";
     }
 

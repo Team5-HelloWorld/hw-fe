@@ -15,7 +15,7 @@ const ProductsAll = () => {
             setLoading(true);
             const URL = '/home';
             // const response = await fetch("https://fakestoreapi.com/products");
-            const response = await fetch("http://localhost:8080/home/");
+            const response = await fetch("http://localhost:8080/home");
             setData(await response.clone().json());
             setFilter(await response.json());
             setLoading(false);

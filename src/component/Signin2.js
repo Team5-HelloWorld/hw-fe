@@ -46,6 +46,7 @@ function SignIn2() {
 
     if(result.status === "8000") {
       sessionStorage.setItem("sessionVal", email)
+      sessionStorage.setItem("sessionVal2", result.name)
       swal("로그인에 성공하였습니다.!", {
         // buttons: false,
         timer: 2000
@@ -112,18 +113,6 @@ function SignIn2() {
             >
               로그인
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>

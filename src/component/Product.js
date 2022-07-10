@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import {useDispatch} from 'react-redux';
-import {addCart} from '../redux/action';
 import Skeleton from 'react-loading-skeleton';
 import {useParams} from 'react-router';
 import { NavLink } from 'react-router-dom';
@@ -46,13 +45,6 @@ const Product = () => {
     const [result1, setResult1] = useState([]);
     const [result2, setResult2] = useState([]);
     const [result3, setResult3] = useState([]);
-
-
-    const dispatch = useDispatch();
-    const addProduct = (product) => {
-        dispatch(addCart(product));
-    }
-
 
     useEffect(() => {
 
@@ -141,8 +133,7 @@ const Product = () => {
                         {product.goodsInfo}
                     </p>
 
-                    <button className="btn btn-outline-dark px-4 py-2" 
-                    onClick={() => addProduct(product)}>
+                    <button className="btn btn-outline-dark px-4 py-2">
                         요청하기
                     </button>
                 </div>
