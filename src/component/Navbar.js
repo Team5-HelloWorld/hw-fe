@@ -5,26 +5,16 @@ import axios from 'axios';
 
 export default function Navbar() {
 
-    // const state = useSelector((state) => state.handleCart)
-    // const token = localStorage.getItem('accessToken');
     const sessionValue = sessionStorage.getItem('sessionVal');
-    // const sessionValue = sessionStorage.getItem('sessionVal2');
     
     const onClickHandler = () => {
-        // fetch("http://localhost:8080/logout");
         sessionStorage.removeItem('sessionVal');
         sessionStorage.removeItem('sessionVal2');
+        sessionStorage.removeItem('sessionVal3');
+        sessionStorage.removeItem('sessionValId');
         window.location.href = "/";
     }
 
-    // function sessionChange() {
-    //     if(token) {
-    //         const sub = document.getElementsById("login");
-    //             sub.innerText="로그아웃";
-    //     }
-    // }
-    
-    console.log(sessionValue); 
   return (
     (() => {
         if(sessionValue !== null){

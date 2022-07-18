@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
-const Products = () => {
+const ProductsAll = () => {
 
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState(data);
@@ -23,7 +23,7 @@ const Products = () => {
         getProducts();
     }, []);
 
-    // console.log(data);
+    console.log(data);
 
     /*
     useEffect(() => {
@@ -74,13 +74,8 @@ const Products = () => {
     // 카테고리 분류 
     const filterProduct = (cat) => {
         const updatedList = data.filter((x)=>x.category === cat);
-        if(updatedList.length > 6){
-            updatedList.splice(6, updatedList.length)
-        }
         setFilter(updatedList);
     }
-
-    // console.log("sort전", data);
 
     // 조회수별 정렬
     const sortData = () => {
@@ -118,7 +113,7 @@ const Products = () => {
                             <img src={product.imageUrl} class="card-img-top" width="450" height="200" alt={product.name}/>
                             <div class="card-body">
                                 <h5 class="card-title mb-0">{product.name.substring(0,12)}...</h5>
-                                <p class="card-text lead fw-bold">{product.price}원</p>
+                                <p class="card-text lead fw-bold">{product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</p>
                                 <NavLink to={`/products/${product.id}`} className="btn btn-outline-dark">상품 보기</NavLink>
                             </div>
                         </div>
@@ -135,7 +130,7 @@ const Products = () => {
             <div className="container my-5 py-2">
                 <div className="row">
                     <div className="col-12 mb-5">
-                        <h1 className="display-6 fw-bolder text-left">인기상품</h1>
+                        <h1 className="display-6 fw-bolder text-left">전체상품</h1>
                         <hr/>
                     </div>
                 </div>
@@ -147,4 +142,4 @@ const Products = () => {
     )
 }
 
-export default Products
+export default ProductsAll

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,43 +17,45 @@ import swal from 'sweetalert';
 
 const theme = createTheme();
 
-//api
-async function loginUser(credentials) {
-  return fetch('http://localhost:8080/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      "Accept": "application/json"
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
- }
+function SignIn2() {
 
- export default function Signin() {
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
+  const navigate = useNavigate();
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const response = await loginUser({
-      username,
-      password
-    });
-    console.log(response);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+}
 
-    if ('accessToken' in response) {
-      swal("Success", response.message, "success", {
-        buttons: false,
-        timer: 2000,
+  //api
+  async function loginUser() {
+    
+    let data = {email, password}
+    
+    let result = await fetch('http://localhost:8080/login', {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        "Accept": "application/json"
+      }
+    })
+    result = await result.json();
+    console.log("result", result);
+
+    if(result.status === "8000") {
+      sessionStorage.setItem("sessionVal", email)
+      sessionStorage.setItem("sessionVal2", result.name)
+      swal("로그인에 성공하였습니다.!", {
+        // buttons: false,
+        timer: 6000
       })
-      .then((value) => {
-        localStorage.setItem('accessToken', response['accessToken']);
-        localStorage.setItem('user', JSON.stringify(response['user']));
-        window.location.href = "/";
-      });
-    } else {
-      swal("Failed", response.message, "error");
+      // navigate("/");
+      window.location.href = "/";
+    }
+    else {
+      swal("이메일 또는 비밀번호가 잘못되었습니다.")
     }
   }
 
@@ -83,7 +86,7 @@ async function loginUser(credentials) {
               label="이메일"
               name="email"
               autoComplete="email"
-              onChange={e => setUserName(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               autoFocus
             />
             <TextField
@@ -106,24 +109,15 @@ async function loginUser(credentials) {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={loginUser}
             >
               로그인
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
   );
 }
+
+export default SignIn2;

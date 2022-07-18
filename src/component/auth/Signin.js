@@ -17,7 +17,7 @@ import swal from 'sweetalert';
 
 const theme = createTheme();
 
-function SignIn2() {
+function SignIn() {
 
   const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ function SignIn2() {
       sessionStorage.setItem("sessionVal2", result.name)
       swal("로그인에 성공하였습니다.!", {
         // buttons: false,
-        timer: 2000
+        timer: 6000
       })
       // navigate("/");
       window.location.href = "/";
@@ -120,4 +120,4 @@ function SignIn2() {
   );
 }
 
-export default SignIn2;
+export default SignIn;

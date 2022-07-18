@@ -43,7 +43,7 @@ function SignUp() {
 
     let data = {email, password, name}
 
-    let result = await fetch("http://localhost:8080/member/register", {
+    let result = await fetch("http://localhost:8080/member", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
