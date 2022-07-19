@@ -1,7 +1,5 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom';
-import {useSelector} from "react-redux";
-import axios from 'axios';
 
 export default function Navbar() {
 
@@ -34,32 +32,18 @@ export default function Navbar() {
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to="/products">Product</NavLink>
                                 </li>
-                                {/* <li className="nav-item">
-                                    <NavLink className="nav-link" to="/about">About</NavLink>
-                                </li> */}
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to="/contact">Contact</NavLink>
                                 </li>
-                                {/* <li className="nav-item">
-                                    <NavLink className="nav-link" to="/mypage">Mypage</NavLink>
-                                </li> */}
                             </ul>
-                        {/* <form className="d-flex" role="search">
-                            <input className="form-control mx-2" type="search" placeholder="Search" aria-label="Search"/>
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form> */}
             
                             <div className="buttons"> 
-                                {/* <NavLink to="/login" className="btn btn-outline-dark login">
-                                    <i className="fa fa-sign-in me-1" onClick={sessionChange}> 로그인</i>
-                                </NavLink>
-                                <NavLink to="/register" className="btn btn-outline-dark ms-2">
-                                    <i className="fa fa-user-plus me-1"> 회원가입</i>
-                                </NavLink> */}
                                 <NavLink to="/mypage" className="btn btn-outline-dark ms-2">
                                     <i className="fa fa-shopping-cart me-1"> 마이페이지</i>
                                 </NavLink>
-                                <button className="btn btn-outline-dark logout" onClick={onClickHandler}>로그아웃</button>
+                                <button className="btn btn-outline-dark logout ms-2" onClick={onClickHandler}>
+                                <i class="fa fa-sign-out" aria-hidden="true"> 로그아웃</i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -82,21 +66,12 @@ export default function Navbar() {
                                         <li className="nav-item">
                                             <NavLink className="nav-link" to="/products">Product</NavLink>
                                         </li>
-                                        {/* <li className="nav-item">
-                                            <NavLink className="nav-link" to="/about">About</NavLink>
-                                        </li> */}
+                                       
                                         <li className="nav-item">
                                             <NavLink className="nav-link" to="/contact">Contact</NavLink>
                                         </li>
-                                        {/* <li className="nav-item">
-                                            <NavLink className="nav-link" to="/mypage">Mypage</NavLink>
-                                        </li> */}
                                     </ul>
-                                {/* <form className="d-flex" role="search">
-                                    <input className="form-control mx-2" type="search" placeholder="Search" aria-label="Search"/>
-                                    <button className="btn btn-outline-success" type="submit">Search</button>
-                                </form> */}
-                    
+
                                     <div className="buttons"> 
                                         <NavLink to="/login" className="btn btn-outline-dark login">
                                             <i className="fa fa-sign-in me-1"> 로그인</i>
@@ -104,10 +79,6 @@ export default function Navbar() {
                                         <NavLink to="/register" className="btn btn-outline-dark ms-2">
                                             <i className="fa fa-user-plus me-1"> 회원가입</i>
                                         </NavLink>
-                                        {/* <NavLink to="/cart" className="btn btn-outline-dark ms-2">
-                                            <i className="fa fa-shopping-cart me-1"> 장바구니 ({state.length})</i>
-                                        </NavLink> */}
-                                        {/* <button className="btn btn-outline-dark logout" onClick={onClickHandler}>로그아웃</button> */}
                                     </div>
                                 </div>
                             </div>
@@ -115,5 +86,7 @@ export default function Navbar() {
                         </div>
                         )
                     }
-                })())}
+                })
+            ()
+        )}
             

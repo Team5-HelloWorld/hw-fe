@@ -12,13 +12,13 @@ import Borrow from './component/mypage/Borrow';
 import About from './component/etc/About';
 import Contact from './component/etc/Contact';
 import ProductsAll from './component/product/ProductsAll';
-
+import Profile from './component/exorder';
 function App() {
 
   return (
     <>
+      {/* <Profile /> */}
       <Navbar/>
-    {/* <BrowserRouter> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductsAll />} />
@@ -32,7 +32,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
-    {/* </BrowserRouter> */}
     </>
   );
 }

@@ -37,43 +37,55 @@ const Products = () => {
             </>
         )
     }
-    // 카테고리 분류 
-    const filterProduct = (cat) => {
-        const updatedList = data.filter((x)=>x.category === cat);
-        if(updatedList.length > 6){
-            updatedList.splice(6, updatedList.length)
-        }
-        setFilter(updatedList);
-    }
-
-    // console.log("sort전", data);
-
     // 조회수별 정렬
     const sortData = () => {
         data.sort(function(a,b) {
             return parseFloat(b.reviews) - parseFloat(a.reviews);
         })
-        // console.log("sort 후",data);
     }
     sortData();
     
+    
+    let arr = [];
+    const tent = data.filter((x) => x.category === "tent").slice(0,6);
+    const tarp = data.filter((x) => x.category === "tarp").slice(0,6);
+    const light = data.filter((x) => x.category === "light").slice(0,6);
+    const sleepingBag = data.filter((x) => x.category === "sleeping_bag").slice(0,6);
+    const chair = data.filter((x) => x.category === "chair").slice(0,6);
+
+    const list = arr.concat(tent);
+    const list1 = list.concat(tarp);
+    const list2 = list1.concat(light);
+    const list3 = list2.concat(sleepingBag);
+    const list4 = list3.concat(chair);
+    
+    // 카테고리 분류 및 카테고리별 6개 상품 보여주기
+    const filterList = (cat) => {
+        const updatedList = list4.filter((x)=>x.category === cat);
+        if(updatedList.length > 6){
+            updatedList.splice(6, updatedList.length)
+        }
+        setFilter(updatedList);
+    }
+    console.log(filter);
+
     // 상품 카테고리별 가져오기
     const ShowProducts = () => {
         return(
             <>
-            <div className="buttons d-flex justify-content-left mb-5 pb-5">
+            <div className="buttons d-flex justify-content-left mb-5">
                 <button className="btn btn-outline-dark me-2"
-                onClick={()=> setFilter(data)}>인기상품</button>
+                onClick={()=> setFilter(list4)}>인기상품</button>
                 <button className="btn btn-outline-dark me-2"
-                onClick={()=> filterProduct("tent")}>텐트</button>
+                onClick={()=> filterList("tent")}>텐트</button>
                 <button className="btn btn-outline-dark me-2"
-                 onClick={()=> filterProduct("tarp")}>식기</button>
+                 onClick={()=> filterList("tarp")}>타프</button>
                 <button className="btn btn-outline-dark me-2"
-                 onClick={()=> filterProduct("light")}>조명</button>
+                 onClick={()=> filterList("light")}>조명</button>
                 <button className="btn btn-outline-dark me-2"
-                 onClick={()=> filterProduct("sleeping_bag")}>침낭</button>
+                 onClick={()=> filterList("sleeping_bag")}>침낭</button>
                 <button className="btn btn-outline-dark me-2"
-                 onClick={()=> filterProduct("chair")}>의자</button>
+                 onClick={()=> filterList("chair")}>의자</button>
             </div>
             {/* 상품 가져오기 */}
             {filter.map((product)=>{
@@ -98,7 +110,7 @@ const Products = () => {
 
     return (
         <div>
-            <div className="container my-5 py-2">
+            <div className="container my-5">
                 <div className="row">
                     <div className="col-12 mb-5">
                         <h1 className="display-6 fw-bolder text-left">인기상품</h1>

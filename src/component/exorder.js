@@ -5,10 +5,10 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Title from './Title';
+import Title from './mypageUi/Title';
 import './styles_order.css'
 
-function Orders({ userId }) {
+function Profile({ userId }) {
     
   const email = sessionStorage.getItem('sessionVal');
 
@@ -73,4 +73,4 @@ function Orders({ userId }) {
   );
 }
 
-export default Orders;
+export default Profile;

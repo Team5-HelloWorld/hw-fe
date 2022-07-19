@@ -207,11 +207,19 @@ function Exercise({userId}) {
                                 </TableRow>
                                 </TableHead>
                                 <TableBody>
+                                {data.review.map((data) => ( 
                                     <StyledTableRow key={data.name}>
+                                        <StyledTableCell component="th" scope="row">{data.email}</StyledTableCell>
+                                        <StyledTableCell align="center">{data.review}</StyledTableCell>
+                                        <StyledTableCell align="right">{data.grade}</StyledTableCell>
+                                    </StyledTableRow>
+                                ))}
+
+                                    {/* <StyledTableRow key={data.name}>
                                     <StyledTableCell component="th" scope="row">{list2}</StyledTableCell>
                                     <StyledTableCell align="center">{list3}</StyledTableCell>
                                     <StyledTableCell align="right">{list4}</StyledTableCell>
-                                    </StyledTableRow>
+                                    </StyledTableRow> */}
                                 </TableBody>
                             </Table>
                         </TableContainer>

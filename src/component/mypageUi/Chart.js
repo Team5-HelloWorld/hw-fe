@@ -1,71 +1,64 @@
-import * as React from 'react';
+import React, { useState, useEffect} from 'react';
 import { useTheme } from '@mui/material/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
+import './styles.css'
 
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
-
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined),
-];
-
-export default function Chart() {
+export default function Chart(userId) {
   const theme = useTheme();
+
+  const email = sessionStorage.getItem('sessionVal');
+  const [data, setData] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(null);
+  
+  
+  useEffect(() => {
+    let data = {email};
+    
+    window
+    .fetch(`http://localhost:8080/mypage/overview`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        "Accept": "application/json"
+      }
+    })
+    .then((res) => res.json())
+      .then((info) => {
+          setData(info);
+          setIsLoaded(false);
+      })
+      .catch((err) => {
+          setError(err);
+          setIsLoaded(false);
+      });
+    }, [userId])
 
   return (
     <React.Fragment>
-      <Title>금일 거래량</Title>
-      <ResponsiveContainer>
-        <LineChart
-          data={data}
-          margin={{
-            top: 16,
-            right: 16,
-            bottom: 0,
-            left: 24,
-          }}
-        >
-          <XAxis
-            dataKey="time"
-            stroke={theme.palette.text.secondary}
-            style={theme.typography.body2}
-          />
-          <YAxis
-            stroke={theme.palette.text.secondary}
-            style={theme.typography.body2}
-          >
-            <Label
-              angle={270}
-              position="left"
-              style={{
-                textAnchor: 'middle',
-                fill: theme.palette.text.primary,
-                ...theme.typography.body1,
-              }}
-            >
-              금액 (₩)
-            </Label>
-          </YAxis>
-          <Line
-            isAnimationActive={false}
-            type="monotone"
-            dataKey="amount"
-            stroke={theme.palette.primary.main}
-            dot={false}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </React.Fragment>
+      <div className="chart-temp">
+        <div className="chartLend"> 
+          <Title>임차현황</Title>
+          <br/>
+          <div className="col ms-5"> 
+            <h4>임차요청중 {data.lendRequestTotal}</h4>
+            <h4>임차중 {data.lendingTotal}</h4>
+            <h4>임차완료 {data.lendCompleteTotal}</h4>
+          </div>
+        </div>
+
+        <div className="chartRent"> 
+          <Title>임대현황</Title>
+          <br/>
+          <div className="col ms-5"> 
+            <h4>임대요청중 {data.rentRequestTotal}</h4>
+            <h4>임대중 {data.rentingTotal}</h4>
+            <h4>임대완료 {data.rentCompleteTotal}</h4>
+          </div>
+        </div>
+      </div>
+    
+  </React.Fragment>
   );
 }

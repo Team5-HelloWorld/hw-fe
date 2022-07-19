@@ -134,7 +134,7 @@ function ReviseContent() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    marginLeft: 25
+                    marginLeft: 50
                   }}
                 >
                   <Typography component="h1" variant="h5">
