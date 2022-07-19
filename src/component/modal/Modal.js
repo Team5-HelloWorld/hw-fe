@@ -60,7 +60,7 @@ function Modalcomponent(props) {
       <Modal.Body>
 
       <div className="star">
-        <h2>해당 상품의 평점을 남겨주세요</h2>
+        <h2>거래자분은 어떠셨나요?</h2>
         <Rating
         // fillColor="#BADA55"
         // allowHalfIcon

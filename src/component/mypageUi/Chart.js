@@ -41,20 +41,30 @@ export default function Chart(userId) {
         <div className="chartLend"> 
           <Title>임차현황</Title>
           <br/>
-          <div className="col ms-5"> 
-            <h4>임차요청중 {data.lendRequestTotal}</h4>
-            <h4>임차중 {data.lendingTotal}</h4>
-            <h4>임차완료 {data.lendCompleteTotal}</h4>
+          <div className="col"> 
+            <h4>임차요청중 {data.rentRequestTotal}</h4>
+            <h4>임차중 {data.rentingTotal}</h4>
+            <h4>임차완료 {data.rentCompleteTotal}</h4>
           </div>
         </div>
 
         <div className="chartRent"> 
           <Title>임대현황</Title>
           <br/>
-          <div className="col ms-5"> 
-            <h4>임대요청중 {data.rentRequestTotal}</h4>
-            <h4>임대중 {data.rentingTotal}</h4>
-            <h4>임대완료 {data.rentCompleteTotal}</h4>
+          <div className="col"> 
+            <h4>임대요청중 {data.lendRequestTotal}</h4>
+            <h4>임대중 {data.lendingTotal}</h4>
+            <h4>임대완료 {data.lendCompleteTotal}</h4>
+          </div>
+        </div>
+
+        <div className="chartRent"> 
+          <Title>내 평가</Title>
+          <br/>
+          <div className="col"> 
+            <h4>임대요청중 {data.lendRequestTotal}</h4>
+            <h4>임대중 {data.lendingTotal}</h4>
+            <h4>임대완료 {data.lendCompleteTotal}</h4>
           </div>
         </div>
       </div>

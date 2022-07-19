@@ -56,15 +56,34 @@ function Orders({ userId }) {
           </TableRow>
         </TableHead>
         <TableBody>
-              {user.lendInfo.map((data) => (
-                    <TableRow key={data.id}>
-                        <TableCell>{data.id}</TableCell>
-                        <TableCell>{data.name}</TableCell>
-                        <TableCell>{data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+ "원"}</TableCell>
-                        <TableCell align="center">{data.rentalStartDate} ~ {data.rentalEndDate}</TableCell>
-                        <TableCell align="right">{data.rentStatus}</TableCell>
-                    </TableRow>
-                ))}
+          {user.lendInfo ? (
+            user.lendInfo.map((data) => (
+                  <TableRow key={data.id}>
+                      <TableCell>{data.id + " - 임대"}</TableCell>
+                      <TableCell>{data.name}</TableCell>
+                      <TableCell>{data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+ "원"}</TableCell>
+                      <TableCell align="center">{data.rentalStartDate} ~ {data.rentalEndDate}</TableCell>
+                      <TableCell align="right">{data.rentStatus}</TableCell>
+                  </TableRow>
+              ))
+          ) : (
+            <div> 
+            </div>
+          )}
+          {user.rentInfo ? (
+            user.rentInfo.map((data) => (
+                  <TableRow key={data.id}>
+                      <TableCell>{data.id + " - 임차"}</TableCell>
+                      <TableCell>{data.name}</TableCell>
+                      <TableCell>{data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+ "원"}</TableCell>
+                      <TableCell align="center">{data.rentalStartDate} ~ {data.rentalEndDate}</TableCell>
+                      <TableCell align="right">{data.rentStatus}</TableCell>
+                  </TableRow>
+              ))
+          ) : (
+            <div> 
+            </div>
+          )}
         </TableBody>
       </Table>
       <br/><br/>
