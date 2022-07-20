@@ -47,7 +47,6 @@ export default function Deposits(userId) {
             setIsLoaded(false);
         });
       }, [userId])
-      console.log(data);
       
       if (isLoaded) return <p>Loading...</p>;
       if (error) return <p>Error!</p>;

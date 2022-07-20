@@ -85,7 +85,6 @@ function ReviseContent() {
         }
       })
       result = await result.json();
-      console.log("result", result);
 
       if(result.status === "7000") {
         swal("비밀번호 변경에 성공하였습니다.!", {

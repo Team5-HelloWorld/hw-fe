@@ -62,9 +62,10 @@ export default function Chart(userId) {
           <Title>내 평가</Title>
           <br/>
           <div className="col"> 
-            <h4>임대요청중 {data.lendRequestTotal}</h4>
-            <h4>임대중 {data.lendingTotal}</h4>
-            <h4>임대완료 {data.lendCompleteTotal}</h4>
+            <h4>평점 : {data.grade}</h4>
+            <br/>
+            <br/>
+            <p id="pwhite" align="center">0점 = 평가 미존재</p>
           </div>
         </div>
       </div>

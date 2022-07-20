@@ -35,13 +35,14 @@ function Modalcomponent(props) {
           }
         })
         result = await result.json();
-        console.log("result", result);
-    
+
         if(result.status === "6000") {
           swal("반납이 완료되었습니다.", {
             timer: 6000
           })
           window.location.href = "/rent";
+        } else {
+          swal("오류가 발생하였습니다.")
         }
       }
 

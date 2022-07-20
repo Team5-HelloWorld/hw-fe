@@ -105,15 +105,26 @@ function Exercise({userId}) {
 
     let priceUnit = data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     
-    let rentListStart = [];
-    let rentListEnd = [];
+    // 날짜뺴보자
+    const excludeDates = [
+        data.rentPeriod.map((data) => 
+            new Date({
+                start: data.rentalStartDate,
+                end: data.rentalEndDate
+            })
+        )
+    ]
+    console.log(excludeDates);
+    console.log(data);
+    console.log(new Date());
+    console.log((data.rentPeriod[0].rentalStartDate));
+    console.log(subDays(new Date(data.rentPeriod[0].rentalStartDate), 5));
 
-    for (let i = 0; i < data.rentPeriod.length; i++) {
-        rentListStart.push(data.rentPeriod[i].rentalStartDate);
-        rentListEnd.push(data.rentPeriod[i].rentalStartDate);
-    }
-
-    console.log(rentListStart[0]);
+    const handdledData = data.rentPeriod.map(({ rentalStartDate, rentalEndDate }) => ({
+        start: subDays(new Date(rentalStartDate), 0),
+        end: new Date(rentalEndDate),
+      }));
+    console.log(handdledData);
 
     let arr1 = [];
     let arr2 = [];
@@ -153,6 +164,9 @@ function Exercise({userId}) {
                     <h3 className="display-6 fw-bold my-4">
                         가격: {priceUnit}원
                     </h3>
+                    <h4 className="">
+                        평점: {data.grade} 
+                    </h4>
                     <p className="lead">
                         {data.goodsInfo}
                     </p>
@@ -170,12 +184,7 @@ function Exercise({userId}) {
                             startDate={startDate}
                             endDate={endDate}
                             minDate={new Date}
-                            // dateFormat={DATE_FORMAT}
-                            // excludeDates={[data.rentPeriod[0].rentalStartDate]}
-                            // excludeDateIntervals={[{
-                            //     start: rentListStart[0],
-                            //     end: rentListEnd[0]
-                            // }]}
+                            excludeDateIntervals={handdledData}
                             />
                             <h3>대여 종료일</h3>
                             <ReactDatePicker
@@ -185,6 +194,7 @@ function Exercise({userId}) {
                             startDate={startDate}
                             endDate={endDate}
                             minDate={startDate}
+                            excludeDateIntervals={handdledData}
                             />
                         </div>
                     </div>
@@ -210,7 +220,7 @@ function Exercise({userId}) {
                                 {data.review.map((data) => ( 
                                     <StyledTableRow key={data.name}>
                                         <StyledTableCell component="th" scope="row">{data.email}</StyledTableCell>
-                                        <StyledTableCell align="center">{data.review}</StyledTableCell>
+                                        <StyledTableCell align="left">{data.review}</StyledTableCell>
                                         <StyledTableCell align="right">{data.grade}</StyledTableCell>
                                     </StyledTableRow>
                                 ))}

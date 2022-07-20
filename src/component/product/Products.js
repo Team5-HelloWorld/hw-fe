@@ -67,7 +67,6 @@ const Products = () => {
         }
         setFilter(updatedList);
     }
-    console.log(filter);
 
     // 상품 카테고리별 가져오기
     const ShowProducts = () => {
