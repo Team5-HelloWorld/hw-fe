@@ -15,6 +15,7 @@ import { mainListItems, secondaryListItems } from '../mypageUi/listItems';
 import List from '@mui/material/List';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MuiDrawer from '@mui/material/Drawer';
+import SignIn from "../auth/Signin";
 
 // axios.defaults.withCredentials = true;
 // const headers = { withCredentials: true };
@@ -100,97 +101,105 @@ function ReviseContent() {
     }
   }
   return (
-    <div style={{
-      justifyContent: 'center',
-    }}>
-        <div> 
-        <ThemeProvider theme={mdTheme}>
-          <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <Drawer variant="permanent" open={open}>
-              <Toolbar
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'flex-end',
-                  px: [1],
-                }}
-              >
-                <IconButton onClick={toggleDrawer}>
-                  {/* <ChevronLeftIcon /> */}
-                </IconButton>
-              </Toolbar>
-              <Divider />
-              <List component="nav">
-                {mainListItems}
-                <Divider sx={{ my: 1 }} />
-                {secondaryListItems}
-              </List>
-            </Drawer>
-            <Box
-                  sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    marginLeft: 50
-                  }}
-                >
-                  <Typography component="h1" variant="h5">
-                    회원정보 수정
-                  </Typography>
-                  <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label="기존 비밀번호"
-                      type="password"
-                      id="password"
-                      onChange={e => setCurrentPassword(e.target.value)}
-                      autoComplete="current-password"
-                      autoFocus
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label="새로운 비밀번호"
-                      type="password"
-                      id="password"
-                      onChange={e => setNewPassword(e.target.value)}
-                      autoComplete="new-password"
-                    />  
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label="새로운 비밀번호 확인"
-                      type="password"
-                      id="password"
-                      onChange={e => setNewPasswordConfirm(e.target.value)}
-                      autoComplete="confirm-new-password"
-                    />  
-                    
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2 }}
-                      onClick={changeUserInfo}
+    <>
+      {email ? (
+        <div style={{
+          justifyContent: 'center',
+        }}>
+            <div> 
+            <ThemeProvider theme={mdTheme}>
+              <Box sx={{ display: 'flex' }}>
+                <CssBaseline />
+                <Drawer variant="permanent" open={open}>
+                  <Toolbar
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'flex-end',
+                      px: [1],
+                    }}
+                  >
+                    <IconButton onClick={toggleDrawer}>
+                      {/* <ChevronLeftIcon /> */}
+                    </IconButton>
+                  </Toolbar>
+                  <Divider />
+                  <List component="nav">
+                    {mainListItems}
+                    <Divider sx={{ my: 1 }} />
+                    {secondaryListItems}
+                  </List>
+                </Drawer>
+                <Box
+                      sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        marginLeft: 50
+                      }}
                     >
-                      회원정보 수정
-                    </Button>
+                      <Typography component="h1" variant="h5">
+                        회원정보 수정
+                      </Typography>
+                      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          name="password"
+                          label="기존 비밀번호"
+                          type="password"
+                          id="password"
+                          onChange={e => setCurrentPassword(e.target.value)}
+                          autoComplete="current-password"
+                          autoFocus
+                        />
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          name="password"
+                          label="새로운 비밀번호"
+                          type="password"
+                          id="password"
+                          onChange={e => setNewPassword(e.target.value)}
+                          autoComplete="new-password"
+                        />  
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          name="password"
+                          label="새로운 비밀번호 확인"
+                          type="password"
+                          id="password"
+                          onChange={e => setNewPasswordConfirm(e.target.value)}
+                          autoComplete="confirm-new-password"
+                        />  
+                        
+                        <Button
+                          type="submit"
+                          fullWidth
+                          variant="contained"
+                          sx={{ mt: 3, mb: 2 }}
+                          onClick={changeUserInfo}
+                        >
+                          회원정보 수정
+                        </Button>
+                      </Box>
+                    </Box>
                   </Box>
-                </Box>
-              </Box>
-          </ThemeProvider>
+              </ThemeProvider>
+            </div>
         </div>
-    </div>
-  );
+      ) : (
+        swal("올바르지 않은 요청입니다"), 
+      <SignIn/>
+      )}
+
+  </>
+    );
 };
 
 export default function Revise() {

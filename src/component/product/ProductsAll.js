@@ -23,36 +23,6 @@ const ProductsAll = () => {
         getProducts();
     }, []);
 
-    console.log(data);
-
-    /*
-    useEffect(() => {
-        const getProducts = async () => {
-            setLoading(true);
-            // data 가져오기
-            // const response = await fetch("https://fakestoreapi.com/products");
-            const response = await fetch("http://localhost:8080/home", {
-                method: 'GET',
-                mode: 'cors',
-                headers: {
-                    'Access-Control-Allow-Origin' : '*'
-                }
-        });
-            if(componentMounted){
-                setData(await response.clone().json());
-                setFilter(await response.json());
-                setLoading(false);
-                console.log(filter)
-            }
-
-            return () => {
-                componentMounted = false;
-            }
-        }
-        getProducts();
-    }, []);
-    */
-
     const Loading = () => {
         return(
             <>
@@ -82,7 +52,6 @@ const ProductsAll = () => {
         data.sort(function(a,b) {
             return parseFloat(b.reviews) - parseFloat(a.reviews);
         })
-        // console.log("sort 후",data);
     }
     sortData();
 

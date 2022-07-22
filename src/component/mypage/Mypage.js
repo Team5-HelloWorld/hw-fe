@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import Dashboard from "../mypageUi/Dashboard";
+import SignIn from "../auth/Signin";
 
 // axios.defaults.withCredentials = true;
 // const headers = { withCredentials: true };
@@ -25,13 +26,18 @@ import Dashboard from "../mypageUi/Dashboard";
 
 const MypageForm = () => {
 
+  const email = sessionStorage.getItem('sessionVal');
+
   const divStyle = {
     margin: 50
   };
 
   return (
     <>
-      <Dashboard/>
+      {email ? (<Dashboard/>) : (
+        swal("올바르지 않은 요청입니다"), 
+      <SignIn/>
+      )}
     </>
   );
 };

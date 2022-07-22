@@ -42,14 +42,13 @@ function SignIn() {
       }
     })
     result = await result.json();
-    console.log("result", result);
 
     if(result.status === "8000") {
       sessionStorage.setItem("sessionVal", email)
       sessionStorage.setItem("sessionVal2", result.name)
       swal("로그인에 성공하였습니다.!", {
         // buttons: false,
-        timer: 6000
+        timer: 10000
       })
       // navigate("/");
       window.location.href = "/";
@@ -99,10 +98,6 @@ function SignIn() {
               id="password"
               onChange={e => setPassword(e.target.value)}
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="기억하기"
             />
             <Button
               type="submit"

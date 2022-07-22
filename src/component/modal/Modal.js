@@ -14,7 +14,6 @@ function Modalcomponent(props) {
 
   const handleRating = (rate) => {
     setGrade(rate/20)
-    console.log(grade);
   }
     // 리뷰 넘기기 버튼 기능
 

@@ -55,12 +55,12 @@ export default function Deposits(userId) {
     <React.Fragment>
       <Title>총 소비금액</Title>
       <Typography component="p" variant="h4">
-        {data.rentPriceSum} 원
+        {data.rentPriceSum ? (data.rentPriceSum) : (0)} 원
       </Typography>
       <br/>
       <Title>총 대여수익</Title>
       <Typography component="p" variant="h4">
-        {data.lendPriceSum} 원
+        {data.lendPriceSum ? (data.lendPriceSum) : (0)} 원
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         {today() + " 기준"}

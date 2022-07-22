@@ -10,8 +10,6 @@ import Paper from '@mui/material/Paper';
 import ReactDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import swal from 'sweetalert';
-import { subDays, addDays } from 'date-fns';
-
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -56,33 +54,34 @@ function Exercise({userId}) {
     const rentalStartDate = rsdate1 + "-" + rsdate2 + "-" + rsdate3;
     const rentalEndDate = redate1 + "-" + redate2 + "-" + redate3;
 
-    const [bookedDate, setBookedDate] = useState([]);
-
-    const DATE_FORMAT = 'yyyy년 MM월 dd일';
-
     // 요청하기 버튼
     // 상품id, 회원id, 대여시작일, 대여종료일 넘기기 (POST)
     // 요청하기 성공시 swal 후 페이지 이동
     async function postProduct() {
-        let data = {id, email, rentalStartDate, rentalEndDate}
-
-        let result = await fetch('http://localhost:8080/rental/request', {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-                "Accept": "application/json"
+        if(email) {
+            let data = {id, email, rentalStartDate, rentalEndDate}
+    
+            let result = await fetch('http://localhost:8080/rental/request', {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Accept": "application/json"
+                }
+            })
+            result = await result.json();
+    
+            if(result.status === "6000") {
+                swal("대여 요청이 성공적으로 이루어졌습니다.");
+                sessionStorage.setItem("sessionVal3", "9999");
+            } else if(result.status === "6001") {
+                swal("대여 요청에 실패하였습니다.");
+            } else {
+                swal("한 상품에 대해서 한번의 요청만 가능합니다.")
             }
-        })
-        result = await result.json();
-
-        if(result.status === "6000") {
-            swal("대여 요청이 성공적으로 이루어졌습니다.");
-            sessionStorage.setItem("sessionVal3", "9999");
-        } else if(result.status === "6001") {
-            swal("대여 요청에 실패하였습니다.");
         } else {
-            swal("한 상품에 대해서 한번의 요청만 가능합니다.")
+            alert("로그인 후 요청해주세요")
+            window.location.href = "/login";
         }
     }
 
@@ -105,48 +104,6 @@ function Exercise({userId}) {
 
     let priceUnit = data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     
-    // 날짜뺴보자
-    const excludeDates = [
-        data.rentPeriod.map((data) => 
-            new Date({
-                start: data.rentalStartDate,
-                end: data.rentalEndDate
-            })
-        )
-    ]
-    console.log(excludeDates);
-    console.log(data);
-    console.log(new Date());
-    console.log((data.rentPeriod[0].rentalStartDate));
-    console.log(subDays(new Date(data.rentPeriod[0].rentalStartDate), 5));
-
-    const handdledData = data.rentPeriod.map(({ rentalStartDate, rentalEndDate }) => ({
-        start: subDays(new Date(rentalStartDate), 0),
-        end: new Date(rentalEndDate),
-      }));
-    console.log(handdledData);
-
-    let arr1 = [];
-    let arr2 = [];
-    let arr3 = [];
-    let arr4 = [];
-
-    for (let i = 0; i < data.rentPeriod.length; i++) {
-        arr1.push(data.rentPeriod[i]);
-    }
-    for (let i = 0; i < data.review.length; i++) {
-        arr2.push(data.review[i]);
-    }
-    for (let i = 0; i < data.review.length; i++) {
-        arr3.push(data.review[i]);
-    }
-    for (let i = 0; i < data.review.length; i++) {
-        arr4.push(data.review[i]);
-    }
-    const list2 = arr2.map((email) => (<p>{email.email}</p>))
-    const list3 = arr2.map((email) => (<p>{email.review}</p>))
-    const list4 = arr3.map((email) => (<p>{email.grade}</p>))
-
     return(
         <div> 
             <div className="container py-5">
@@ -184,7 +141,6 @@ function Exercise({userId}) {
                             startDate={startDate}
                             endDate={endDate}
                             minDate={new Date}
-                            excludeDateIntervals={handdledData}
                             />
                             <h3>대여 종료일</h3>
                             <ReactDatePicker
@@ -194,7 +150,6 @@ function Exercise({userId}) {
                             startDate={startDate}
                             endDate={endDate}
                             minDate={startDate}
-                            excludeDateIntervals={handdledData}
                             />
                         </div>
                     </div>
@@ -224,12 +179,6 @@ function Exercise({userId}) {
                                         <StyledTableCell align="right">{data.grade}</StyledTableCell>
                                     </StyledTableRow>
                                 ))}
-
-                                    {/* <StyledTableRow key={data.name}>
-                                    <StyledTableCell component="th" scope="row">{list2}</StyledTableCell>
-                                    <StyledTableCell align="center">{list3}</StyledTableCell>
-                                    <StyledTableCell align="right">{list4}</StyledTableCell>
-                                    </StyledTableRow> */}
                                 </TableBody>
                             </Table>
                         </TableContainer>

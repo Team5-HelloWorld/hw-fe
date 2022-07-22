@@ -16,6 +16,7 @@ import List from '@mui/material/List';
 import MuiDrawer from '@mui/material/Drawer';
 import Modalcomponent from '../modal/Modal';
 import Button2 from 'react-bootstrap/Button';
+import SignIn from "../auth/Signin";
 
 const drawerWidth = 240;
 const mdTheme = createTheme();
@@ -147,55 +148,60 @@ function Exercise2({userId}) {
 
     return(
         <>
-        <div>
-        <ThemeProvider theme={mdTheme}>
-          <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
+        {email ? (
+          <div>
+          <ThemeProvider theme={mdTheme}>
+            <Box sx={{ display: 'flex' }}>
+              <CssBaseline />
 
-            <Drawer variant="permanent" open={open}>
-              <Toolbar
-                sx={{
+              <Drawer variant="permanent" open={open}>
+                <Toolbar
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                    px: [1],
+                  }}
+                >
+                  <IconButton onClick={toggleDrawer}>
+                  </IconButton>
+                </Toolbar>
+                <Divider />
+                <List component="nav">
+                  {mainListItems}
+                  <Divider sx={{ my: 1 }} />
+                  {secondaryListItems}
+                </List>
+              </Drawer>
+
+              <Box sx={{ 
+                  marginTop: 8,
                   display: 'flex',
+                  flexDirection: 'column',
                   alignItems: 'center',
-                  justifyContent: 'flex-end',
-                  px: [1],
-                }}
-              >
-                <IconButton onClick={toggleDrawer}>
-                </IconButton>
-              </Toolbar>
-              <Divider />
-              <List component="nav">
-                {mainListItems}
-                <Divider sx={{ my: 1 }} />
-                {secondaryListItems}
-              </List>
-            </Drawer>
+                  marginLeft: 5
+                  }}> 
+                  <div>
+                      <h3>임차중 품목</h3>
+                      <hr/>
+                      {list2}
+          
+                      <h3>임차 요청중</h3>
+                      <hr/>
+                      {list1}
 
-            <Box sx={{ 
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                marginLeft: 5
-                }}> 
-                <div>
-                    <h3>임차중 품목</h3>
-                    <hr/>
-                    {list2}
-         
-                    <h3>임차 요청중</h3>
-                    <hr/>
-                    {list1}
-
-                    <h3>임차 완료</h3>
-                    <hr/>
-                    {list3}
-                </div>
-            </Box>
-            </Box>
-          </ThemeProvider>
-        </div>
+                      <h3>임차 완료</h3>
+                      <hr/>
+                      {list3}
+                  </div>
+              </Box>
+              </Box>
+            </ThemeProvider>
+          </div>
+        ) : (
+        swal("올바르지 않은 요청입니다"), 
+      <SignIn/>
+      )}
         </>
     );
 }

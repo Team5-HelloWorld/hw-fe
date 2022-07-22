@@ -86,8 +86,6 @@ function Orders({ userId }) {
           )}
         </TableBody>
       </Table>
-      <br/><br/>
-      <p id="pwhite" align="center">상태는 (01: 요청중, 02: 대여중, 03: 대여완료, 04: 대여거절)을 의미합니다.</p>
     </React.Fragment>
   );
 }

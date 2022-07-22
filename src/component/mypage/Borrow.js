@@ -15,6 +15,7 @@ import { mainListItems, secondaryListItems } from '../mypageUi/listItems';
 import List from '@mui/material/List';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MuiDrawer from '@mui/material/Drawer';
+import SignIn from "../auth/Signin";
 
 const drawerWidth = 240;
 const mdTheme = createTheme();
@@ -87,9 +88,6 @@ function Exercise3({userId}) {
       // 받아올 정보(요청중, 대여중)
       // 01-요청중, 02-대여중, 03-반납완료
       let clone1 = data.filter(v => v.rentStatus === "01");
-
-      
-      
       const list1 = 
       clone1.map((data) => (
         <div>
@@ -111,7 +109,6 @@ function Exercise3({userId}) {
                                 rentalStartDate: data.rentalStartDate,
                                 rentalEndDate: data.rentalEndDate
                               }
-                              console.log(info);
                       
                               let result = await fetch('http://localhost:8080/rental/accept', {
                                   method: "POST",
@@ -122,7 +119,6 @@ function Exercise3({userId}) {
                                   }
                               })
                               result = await result.json();
-                              console.log(result);
                               if(result.status === "6000") {
                                   swal("해당 대여요청을 수락했습니다.")
                                   window.location.href = "/borrow";
@@ -144,7 +140,6 @@ function Exercise3({userId}) {
                                 rentalStartDate: data.rentalStartDate,
                                 rentalEndDate: data.rentalEndDate
                               }
-                              console.log(info);
                       
                               let result = await fetch('http://localhost:8080/rental/reject', {
                                   method: "POST",
@@ -155,7 +150,7 @@ function Exercise3({userId}) {
                                   }
                               })
                               result = await result.json();
-                              console.log(result);
+                              
                               if(result.status === "6000") {
                                   swal("해당 대여요청을 거절했습니다.")
                                   window.location.href = "/borrow";
@@ -203,57 +198,62 @@ function Exercise3({userId}) {
 
     return(
         <>
-        <div>
-        <ThemeProvider theme={mdTheme}>
-          <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
+          {email ? (
+            <div>
+            <ThemeProvider theme={mdTheme}>
+              <Box sx={{ display: 'flex' }}>
+                <CssBaseline />
 
-            <Drawer variant="permanent" open={open}>
-              <Toolbar
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'flex-end',
-                  px: [1],
-                }}
-              >
-                <IconButton onClick={toggleDrawer}>
-                  {/* <ChevronLeftIcon /> */}
-                </IconButton>
-              </Toolbar>
-              <Divider />
-              <List component="nav">
-                {mainListItems}
-                <Divider sx={{ my: 1 }} />
-                {secondaryListItems}
-              </List>
-            </Drawer>
+                <Drawer variant="permanent" open={open}>
+                  <Toolbar
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'flex-end',
+                      px: [1],
+                    }}
+                  >
+                    <IconButton onClick={toggleDrawer}>
+                      {/* <ChevronLeftIcon /> */}
+                    </IconButton>
+                  </Toolbar>
+                  <Divider />
+                  <List component="nav">
+                    {mainListItems}
+                    <Divider sx={{ my: 1 }} />
+                    {secondaryListItems}
+                  </List>
+                </Drawer>
 
-            <Box sx={{ 
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                marginLeft: 5
-                }}> 
-                <div>
-                    <h3>임대중 품목</h3>
-                    <hr/>
-                    {list2}
-         
-                    <h3>임대 요청중</h3>
-                    <hr/>
-                    {list1}
+                <Box sx={{ 
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    marginLeft: 5
+                    }}> 
+                    <div>
+                        <h3>임대중 품목</h3>
+                        <hr/>
+                        {list2}
+            
+                        <h3>임대 요청중</h3>
+                        <hr/>
+                        {list1}
 
-                    <h3>임대 완료</h3>
-                    <hr/>
-                    {list3}
-                </div>
-            </Box>
+                        <h3>임대 완료</h3>
+                        <hr/>
+                        {list3}
+                    </div>
+                </Box>
 
-            </Box>
-          </ThemeProvider>
-        </div>
+                </Box>
+              </ThemeProvider>
+            </div>
+          ) : (
+            swal("올바르지 않은 요청입니다"), 
+            <SignIn/>
+          )}
         </>
     );
 }

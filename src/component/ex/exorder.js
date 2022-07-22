@@ -5,7 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Title from './mypageUi/Title';
+import Title from '../mypageUi/Title';
 import './styles_order.css'
 
 function Profile({ userId }) {

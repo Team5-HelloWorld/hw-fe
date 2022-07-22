@@ -12,7 +12,7 @@ import Borrow from './component/mypage/Borrow';
 import About from './component/etc/About';
 import Contact from './component/etc/Contact';
 import ProductsAll from './component/product/ProductsAll';
-import Profile from './component/exorder';
+import Profile from './component/ex/exorder';
 function App() {
 
   return (

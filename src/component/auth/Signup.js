@@ -31,12 +31,6 @@ function SignUp() {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
-
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-      name: data.get('name')
-    });
   }
 
   async function register() {
@@ -52,11 +46,12 @@ function SignUp() {
       }
     })
     result = await result.json();
-    console.log("result", result);
 
     if(result.status === "9000") {
-      swal("회원가입이 완료되었습니다!")
-      navigate("/login");
+      swal("회원가입이 완료되었습니다!", {
+        timer: 10000
+      })
+      window.location.href = "/login";
     }
     else if(result.status === '9001') {
       swal("이미 존재하는 이메일입니다.")
@@ -120,12 +115,6 @@ function SignUp() {
                   onChange={(e)=>setPassword(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="정보제공에 동의합니다."
-                />
-              </Grid>
             </Grid>
             <Button
               type="submit"
@@ -139,7 +128,7 @@ function SignUp() {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">
-                  Already have an account? Sign in
+                  이미 계정이 있으신가요? 그럼 로그인하세요!
                 </Link>
               </Grid>
             </Grid>
